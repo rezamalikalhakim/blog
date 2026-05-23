@@ -644,6 +644,27 @@
      </section>
 
      <center><p id="contactNote" class="small-note">Apa Yang Bisa Kami Bantu ?</p></center>
+     
+     <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-6 relative z-10 pb-6">
+        <button class="issue-btn menu-button !min-h-[44px] !text-xs md:!text-sm" data-issue="Masalah Hardware">
+            <i data-lucide="cpu" class="w-4 h-4 md:w-5 md:h-5"></i> Hardware
+        </button>
+        <button class="issue-btn menu-button !min-h-[44px] !text-xs md:!text-sm" data-issue="Masalah Software">
+            <i data-lucide="terminal-square" class="w-4 h-4 md:w-5 md:h-5"></i> Software
+        </button>
+        <button class="issue-btn menu-button !min-h-[44px] !text-xs md:!text-sm" data-issue="Masalah Jaringan">
+            <i data-lucide="network" class="w-4 h-4 md:w-5 md:h-5"></i> Jaringan
+        </button>
+        <button class="issue-btn menu-button !min-h-[44px] !text-xs md:!text-sm" data-issue="Masalah Printer">
+            <i data-lucide="printer" class="w-4 h-4 md:w-5 md:h-5"></i> Printer
+        </button>
+        <button class="issue-btn menu-button !min-h-[44px] !text-xs md:!text-sm" data-issue="Instalasi">
+            <i data-lucide="download" class="w-4 h-4 md:w-5 md:h-5"></i> Instalasi
+        </button>
+        <button class="issue-btn menu-button !min-h-[44px] !text-xs md:!text-sm" data-issue="Upgrade/Downgrade">
+            <i data-lucide="arrow-up-down" class="w-4 h-4 md:w-5 md:h-5"></i> Up/Downgrade
+        </button>
+     </div>
     </div>
    </main>
 
@@ -661,7 +682,7 @@
   <script type="module">
     // --- INTEGRASI FIREBASE REALTIME DATABASE ---
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getDatabase, ref, onValue, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
     const firebaseConfig = {
       databaseURL: "https://command-computer-service-blog-default-rtdb.asia-southeast1.firebasedatabase.app/"
@@ -951,6 +972,42 @@
 
     window.addEventListener("resize", resizeCanvas);
 
+// Handle pelaporan masalah ke Dashboard Admin
+    const issueButtons = document.querySelectorAll('.issue-btn');
+    issueButtons.forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const issueType = e.currentTarget.getAttribute('data-issue');
+        
+        // Animasi loading pada tombol
+        const originalContent = btn.innerHTML;
+        btn.innerHTML = '<i data-lucide="loader" class="animate-spin"></i> Mengirim...';
+        btn.disabled = true;
+        if (window.lucide) lucide.createIcons();
+
+        try {
+          const reportsRef = ref(db, 'reports');
+          await push(reportsRef, {
+            kategori: issueType,
+            waktu: serverTimestamp(),
+            status: 'pending',
+            ip_address: 'Terekam Otomatis' // Bisa dikembangkan dengan API IP
+          });
+          
+          showToast(`Laporan [${issueType}] berhasil disinkronkan ke sistem pusat.`);
+        } catch (error) {
+          console.error("Error:", error);
+          showToast("Gagal menghubungi server pusat.");
+        } finally {
+          // Kembalikan tombol ke semula
+          setTimeout(() => {
+            btn.innerHTML = originalContent;
+            btn.disabled = false;
+            if (window.lucide) lucide.createIcons();
+          }, 1000);
+        }
+      });
+    });
+    
     // Initial setup
     startMatrix();
     if (window.lucide) {
