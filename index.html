@@ -591,12 +591,12 @@
     <div class="terminal-card">
      <div class="terminal-top" aria-hidden="true">
         <span class="dot red"></span> <span class="dot yellow"></span> <span class="dot green"></span> 
-        <span class="ml-3 text-xs tracking-[0.2em] text-emerald-200/70">COMMAND BOOT SEQUENCE</span>
+        <span class="ml-3 text-xs tracking-[0.2em] text-emerald-200/70">ADMINISTRATOR COMMAND COMPUTER SERVICE TERMINALS</span>
      </div>
      <div class="terminal-body">
-      <div id="terminalText" class="terminal-text">Tekan tombol mulai untuk mengaktifkan efek hacker dan audio.</div>
+      <div id="terminalText" class="terminal-text">Tekan Tombol "Start" untuk akses Command Computer Service</div>
       <button id="startButton" class="start-button" type="button"> 
-        <i data-lucide="terminal"></i> Mulai Sistem 
+        <i data-lucide="terminal"></i> START
       </button>
      </div>
     </div>
@@ -620,7 +620,7 @@
       <div class="flex items-start justify-between gap-4">
        <div>
         <h2 class="text-xl font-bold text-emerald-300 mb-2">Profile</h2>
-        <p id="profileText">Command Computer Service di Gg.Musik Desa Lebak Anyar siap membantu kebutuhan instalasi website, troubleshooting komputer, jaringan internet, pemasangan CCTV, serta dukungan teknologi untuk personal maupun bisnis Anda.</p>
+        <p id="profileText">Command Computer Service adalah tempatnya menemukan solusi dalam pemecahan masalah pada perangkat informasi dan teknologi dengan teknis perbaikan yang ahli dibidangnya sehingga perbaikan menjadi cepat, aman , dan nyaman bagi client. Jasa perbaikan ini berlokasikan di Gg.Musik Desa Lebak Anyar Kec.Pasawahan juga siap membantu dalam 24jam untuk dikunjungi kelokasi masing-masing client atau bisa dipandu menggunakan sistem remote.</p>
        </div>
        <button id="closeProfile" class="close-button !w-auto !min-h-0 !px-3 !py-2" type="button" aria-label="Tutup profile"> <i data-lucide="x"></i> </button>
       </div>
@@ -707,7 +707,7 @@
       },
       "CCTV Installation": {
         desc: "Pemasangan sistem keamanan CCTV untuk area rumah, toko, atau kantor dengan integrasi pemantauan langsung via smartphone.",
-        price: "Mulai dari Rp 200.000 / Kamera"
+        price: "Mulai dari Rp 300.000 / Kamera"
       }
     };
 
@@ -797,7 +797,7 @@
 
     function startMatrix() {
       resizeCanvas();
-      const characters = "01アイウエオカキクケコCOMMANDSERVICE<>/{}[]#$";
+      const characters = "1234567890987654321COMMANDCOMPUTERSERVICE";
       const fontSize = 16;
       let columns = Math.max(1, Math.floor(canvas.width / fontSize));
       let drops = Array(columns).fill(1);
