@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="id" class="h-full w-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Terminal | Command Computer Service</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@500;700;900&display=swap');
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      background: #020807;
+      color: #d7ffe7;
+      font-family: "Share Tech Mono", monospace;
+    }
+
+    .matrix-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(0, 255, 136, 0.08), transparent 28%),
+        radial-gradient(circle at 78% 72%, rgba(138, 43, 226, 0.08), transparent 30%),
+        linear-gradient(135deg, #020807 0%, #031812 42%, #000000 100%);
+    }
+
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 100% 5px;
+      animation: scanMove 7s linear infinite;
+    }
+
+    @keyframes scanMove { from { background-position: 0 0; } to { background-position: 0 100%; } }
+
+    .glass-panel {
+      background: rgba(1, 20, 14, 0.75);
+      border: 1px solid rgba(0, 255, 136, 0.28);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36), inset 0 0 20px rgba(0, 255, 136, 0.05);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+    }
+
+    .glitch-title {
+      font-family: "Orbitron", sans-serif;
+      text-shadow: 0 0 8px rgba(0, 255, 136, 0.5), 2px 0 rgba(138, 43, 226, 0.5);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+    ::-webkit-scrollbar-thumb { background: rgba(0, 255, 136, 0.4); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0, 255, 136, 0.8); }
+
+    .status-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .status-pending { background: rgba(255, 209, 102, 0.15); color: #ffd166; border: 1px solid rgba(255, 209, 102, 0.4); }
+    .status-resolved { background: rgba(0, 255, 136, 0.15); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.4); }
+
+    .table-row {
+      transition: background 0.2s ease;
+      border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+    }
+    .table-row:hover { background: rgba(0, 255, 136, 0.08); }
+  </style>
+</head>
+<body class="p-4 md:p-8 relative">
+  <div class="matrix-bg"></div>
+  <div class="scanlines"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <header class="glass-panel p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <h1 class="glitch-title text-3xl font-black text-emerald-300">COMMAND // DASHBOARD</h1>
+        <p class="text-emerald-200/60 mt-1 text-sm tracking-widest">REAL-TIME MONITORING SYSTEM</p>
+      </div>
+      <div class="flex gap-4">
+        <div class="glass-panel px-4 py-2 border-emerald-500/40">
+            <span class="text-xs text-emerald-200/60 block">Total Laporan</span>
+            <span id="totalCounter" class="text-xl font-bold text-emerald-300">0</span>
+        </div>
+        <div class="glass-panel px-4 py-2 border-purple-500/40">
+            <span class="text-xs text-purple-200/60 block">Status Sistem</span>
+            <span class="text-sm font-bold text-purple-300 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div> ONLINE</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      
+      <aside class="glass-panel p-6 h-fit">
+        <h2 class="text-lg font-bold text-emerald-300 mb-4 border-b border-emerald-500/30 pb-2 flex items-center gap-2">
+            <i data-lucide="activity" class="w-5 h-5"></i> Analisis Cepat
+        </h2>
+        <ul id="analyticsList" class="space-y-3 text-sm text-emerald-100/80">
+            <li class="flex justify-between items-center">Memuat data...</li>
+        </ul>
+      </aside>
+
+      <main class="glass-panel p-6 lg:col-span-3 overflow-hidden flex flex-col">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-lg font-bold text-emerald-300 flex items-center gap-2">
+                <i data-lucide="list" class="w-5 h-5"></i> Log Laporan Masuk
+            </h2>
+            <button id="clearAllBtn" class="px-3 py-1.5 text-xs bg-red-900/30 text-red-400 border border-red-500/40 rounded hover:bg-red-900/60 transition-colors">Bersihkan Log</button>
+        </div>
+        
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="text-emerald-200/50 text-sm tracking-wider border-b border-emerald-500/30">
+                <th class="pb-3 px-4 font-normal">WAKTU</th>
+                <th class="pb-3 px-4 font-normal">KATEGORI MASALAH</th>
+                <th class="pb-3 px-4 font-normal">STATUS</th>
+                <th class="pb-3 px-4 font-normal text-right">AKSI</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <tr><td colspan="4" class="text-center py-8 text-emerald-200/50">Menunggu koneksi database...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // Pastikan config ini sama persis dengan yang ada di index.html
+    const firebaseConfig = {
+      databaseURL: "https://command-computer-service-blog-default-rtdb.asia-southeast1.firebasedatabase.app/"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const reportsRef = ref(db, 'reports');
+
+    const tableBody = document.getElementById('tableBody');
+    const totalCounter = document.getElementById('totalCounter');
+    const analyticsList = document.getElementById('analyticsList');
+
+    // Format Timestamp
+    function formatTime(timestamp) {
+        if (!timestamp) return "Baru saja";
+        const date = new Date(timestamp);
+        return date.toLocaleString('id-ID', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+    }
+
+    // Listener Realtime Firebase
+    onValue(reportsRef, (snapshot) => {
+      tableBody.innerHTML = '';
+      const data = snapshot.val();
+      
+      if (!data) {
+        tableBody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-emerald-200/50">Tidak ada laporan masuk. Sistem aman.</td></tr>';
+        totalCounter.textContent = '0';
+        analyticsList.innerHTML = '<li>Belum ada data analitik.</li>';
+        return;
+      }
+
+      const entries = Object.entries(data).reverse(); // Terbaru di atas
+      totalCounter.textContent = entries.length;
+
+      // Untuk Analisis
+      const categoryCount = {};
+
+      entries.forEach(([key, val]) => {
+        // Hitung Kategori
+        categoryCount[val.kategori] = (categoryCount[val.kategori] || 0) + 1;
+
+        const tr = document.createElement('tr');
+        tr.className = 'table-row text-sm';
+        
+        const statusClass = val.status === 'resolved' ? 'status-resolved' : 'status-pending';
+        const statusText = val.status === 'resolved' ? 'SELESAI' : 'MENUNGGU';
+        const actionBtn = val.status === 'pending' 
+            ? `<button onclick="window.resolveIssue('${key}')" class="text-emerald-400 hover:text-emerald-200 mr-3" title="Tandai Selesai"><i data-lucide="check-circle" class="w-4 h-4"></i></button>` 
+            : '';
+
+        tr.innerHTML = `
+          <td class="py-4 px-4 whitespace-nowrap">${formatTime(val.waktu)}</td>
+          <td class="py-4 px-4 font-bold text-emerald-100">${val.kategori}</td>
+          <td class="py-4 px-4"><span class="status-badge ${statusClass}">${statusText}</span></td>
+          <td class="py-4 px-4 text-right">
+            ${actionBtn}
+            <button onclick="window.deleteIssue('${key}')" class="text-red-400 hover:text-red-200" title="Hapus Log"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+
+      // Render Analitik
+      analyticsList.innerHTML = '';
+      Object.entries(categoryCount)
+        .sort((a, b) => b[1] - a[1]) // Urutkan dari terbanyak
+        .forEach(([cat, count]) => {
+            analyticsList.innerHTML += `
+                <li class="flex justify-between items-center border border-emerald-900/40 bg-emerald-900/10 p-2 rounded">
+                    <span>${cat}</span>
+                    <span class="font-bold text-purple-300 bg-purple-900/30 px-2 py-0.5 rounded text-xs">${count}x</span>
+                </li>`;
+        });
+
+      if (window.lucide) lucide.createIcons();
+    });
+
+    // Fungsi Global untuk Tombol Aksi
+    window.resolveIssue = async (key) => {
+        const itemRef = ref(db, `reports/${key}`);
+        await update(itemRef, { status: 'resolved' });
+    };
+
+    window.deleteIssue = async (key) => {
+        if(confirm("Hapus log laporan ini dari sistem?")) {
+            const itemRef = ref(db, `reports/${key}`);
+            await remove(itemRef);
+        }
+    };
+
+    document.getElementById('clearAllBtn').addEventListener('click', async () => {
+        if(confirm("PERINGATAN: Hapus SELURUH log laporan? Tindakan ini tidak bisa dibatalkan.")) {
+            await remove(reportsRef);
+        }
+    });
+
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>
