@@ -1,9 +1,6 @@
 <!doctype html>
 <html lang="id" class="h-full w-full">
 <head>
-
-
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Deskripsi Website (Maksimal 150-160 karakter) -->
@@ -346,6 +343,60 @@
       box-shadow: 0 0 22px rgba(0, 255, 136, 0.2);
     }
 
+    /* --- Gaya Dropdown Baru --- */
+    .dropdown-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 100%;
+      min-width: 160px;
+      background: rgba(1, 18, 13, 0.95);
+      border: 1px solid rgba(0, 255, 136, 0.34);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(0, 255, 136, 0.15);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 250ms ease;
+      z-index: 50;
+      overflow: hidden;
+    }
+
+    .dropdown-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 12px 16px;
+      color: #d7ffe7;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+      transition: background 180ms ease, color 180ms ease, padding-left 180ms ease;
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-item:hover, .dropdown-item:focus-visible {
+      background: rgba(0, 255, 136, 0.12);
+      color: #00ff88;
+      padding-left: 20px;
+      outline: none;
+    }
+    /* -------------------------- */
+
     .sidebar-overlay {
       position: fixed;
       inset: 0;
@@ -614,7 +665,21 @@
      
      <nav class="menu-grid" aria-label="Menu utama">
         <button id="profileButton" class="menu-button" type="button"> <i data-lucide="user"></i> Profile </button> 
-        <a class="menu-button" href="blog.html" target="_blank" rel="noopener noreferrer"> <i data-lucide="newspaper"></i> Blog </a> 
+        
+        <!-- BAGIAN DROPDOWN BLOG MULAI -->
+        <div class="dropdown-wrapper" id="blogDropdown">
+          <button class="menu-button" type="button" id="blogButton" aria-haspopup="true" aria-expanded="false">
+            <i data-lucide="newspaper"></i> Blog 
+            <i data-lucide="chevron-down" class="ml-1 transition-transform duration-200" id="blogIcon" style="width: 16px; height: 16px;"></i>
+          </button>
+          <div class="dropdown-menu" id="blogMenu">
+            <a href="Artikel.html" class="dropdown-item">Artikel</a>
+            <a href="Galeri-update.html" class="dropdown-item">Galeri</a>
+            <a href="Layanan.html" class="dropdown-item">Layanan</a>
+          </div>
+        </div>
+        <!-- BAGIAN DROPDOWN BLOG SELESAI -->
+
         <button id="servicesButton" class="menu-button" type="button"> <i data-lucide="wrench"></i> Services </button> 
         <button id="contactButton" class="menu-button" type="button"> <i data-lucide="message-circle"></i> Kontak </button>
      </nav>
@@ -792,6 +857,30 @@
     const serviceTitleDisplay = document.getElementById("serviceTitleDisplay");
     const servicePriceContainer = document.getElementById("servicePriceContainer");
     const servicePrice = document.getElementById("servicePrice");
+
+    // --- LOGIKA DROPDOWN BLOG ---
+    const blogDropdown = document.getElementById('blogDropdown');
+    const blogButton = document.getElementById('blogButton');
+    const blogMenu = document.getElementById('blogMenu');
+    const blogIcon = document.getElementById('blogIcon');
+
+    blogButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      blogMenu.classList.toggle('show');
+      if(blogMenu.classList.contains('show')) {
+        blogIcon.style.transform = 'rotate(180deg)';
+      } else {
+        blogIcon.style.transform = 'rotate(0deg)';
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!blogDropdown.contains(e.target)) {
+        blogMenu.classList.remove('show');
+        blogIcon.style.transform = 'rotate(0deg)';
+      }
+    });
+    // ----------------------------
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -975,7 +1064,7 @@
 
     window.addEventListener("resize", resizeCanvas);
 
-// Handle pelaporan masalah ke Dashboard Admin
+    // Handle pelaporan masalah ke Dashboard Admin
     const issueButtons = document.querySelectorAll('.issue-btn');
     issueButtons.forEach(btn => {
       btn.addEventListener('click', async (e) => {
