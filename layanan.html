@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="id" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layanan & Service - Command Computer Service</title>
+  
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+        * { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .mono { font-family: 'Space Mono', monospace; }
+        html, body { height: 100%; margin: 0; background-color: #0a0a1a; color: #e5e7eb; overflow-x: hidden; }
+        
+        /* Animasi Slide Menu */
+        .slide-menu { transform: translateX(-100%); transition: transform 0.3s ease; }
+        .slide-menu.open { transform: translateX(0); }
+        .overlay { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .overlay.open { opacity: 1; pointer-events: all; }
+        
+        /* Utilitas Tampilan */
+        .gradient-text { background: linear-gradient(135deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); border-color: rgba(0, 210, 255, 0.3); }
+  </style>
+</head>
+<body class="h-full flex flex-col">
+
+  <div id="overlay" class="overlay fixed inset-0 bg-black/60 z-40" onclick="toggleMenu()"></div>
+
+  <nav id="slideMenu" class="slide-menu fixed top-0 left-0 h-full w-72 bg-[#0f0f2a] z-50 shadow-2xl overflow-y-auto">
+    <div class="p-6 border-b border-gray-800">
+     <div class="flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+       <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-white text-sm"><img src="Logo.png" width="100%" height="100%" onerror="this.style.display='none'"></div>
+       <span class="mono text-xs text-cyan-400 font-bold">Menu</span>
+      </div>
+      <button onclick="toggleMenu()" class="text-gray-400 hover:text-white"><i data-lucide="x" style="width:24px;height:24px;"></i></button>
+     </div>
+     <p class="text-xs text-gray-500 mt-1">Command Computer Service</p>
+    </div>
+    
+    <ul class="p-4 space-y-1">
+     <li><a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center"><i data-lucide="home" style="width:14px;height:14px;color:white;"></i></div> Home</a></li>
+     <li><a href="about.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center"><i data-lucide="info" style="width:14px;height:14px;color:white;"></i></div> About & Profile</a></li>
+     <li><a href="artikel.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center"><i data-lucide="file-text" style="width:14px;height:14px;color:white;"></i></div> Artikel</a></li>
+     <li><a href="layanan.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center"><i data-lucide="settings" style="width:14px;height:14px;color:white;"></i></div> Layanan</a></li>
+     <li><a href="galeri.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center"><i data-lucide="image" style="width:14px;height:14px;color:white;"></i></div> Galeri</a></li>
+     <li><a href="kontak.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center"><i data-lucide="phone" style="width:14px;height:14px;color:white;"></i></div> Kontak</a></li>
+     <li><a href="sitemap.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center"><i data-lucide="map" style="width:14px;height:14px;color:white;"></i></div> Sitemap</a></li>
+     <li><a href="termsandconditions.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center"><i data-lucide="shield" style="width:14px;height:14px;color:white;"></i></div> Terms & Conditions</a></li>
+     <li><a href="disclaimer.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center"><i data-lucide="alert-triangle" style="width:14px;height:14px;color:white;"></i></div> Disclaimer</a></li>
+    </ul>
+
+    <div class="p-6 mt-4 border-t border-gray-800">
+        <p class="text-xs text-gray-500 mb-3 uppercase tracking-wider">Social Media</p>
+        <div class="flex gap-4">
+            <a href="https://instagram.com/_reza1996ma_" target="_blank" class="text-gray-400 hover:text-pink-500 transition-colors"><i data-lucide="instagram" style="width:20px;height:20px;"></i></a>
+            <a href="https://facebook.com/commandcomputerservice" target="_blank" class="text-gray-400 hover:text-blue-500 transition-colors"><i data-lucide="facebook" style="width:20px;height:20px;"></i></a>
+        </div>
+    </div>
+  </nav>
+
+  <header class="sticky top-0 z-30 bg-[#0a0a1a]/90 backdrop-blur-md border-b border-gray-800/50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+     <div class="flex items-center gap-2">
+      <button onclick="toggleMenu()" class="p-2 rounded-lg hover:bg-gray-800 transition-colors"><i data-lucide="menu" style="width:22px;height:22px;"></i></button>
+      <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-white text-sm"><img src="Logo.png" width="100%" height="100%" onerror="this.style.display='none'"></div>
+      <div>
+       <a href="index.html"><h1 class="text-lg font-bold gradient-text">Command Computer Service</h1></a>
+       <p class="text-[10px] text-gray-500 mono">by Reza Malik Al Hakim</p>
+      </div>
+     </div>
+     
+     <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="index.html" class="text-white hover:text-cyan-400 transition-colors">Home</a>
+        <a href="artikel.html" class="text-gray-400 hover:text-white transition-colors">Artikel</a>
+        <a href="layanan.html" class="text-cyan-400 font-semibold border-b-2 border-cyan-400 pb-1">Layanan</a>
+        <a href="kontak.html" class="text-gray-400 hover:text-white transition-colors">Kontak</a>
+     </div>
+     <a href="kontak.html" class="hidden sm:block px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-black text-sm font-semibold rounded-lg transition-colors">Konsultasi WA</a>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+      <section class="relative overflow-hidden py-16 px-4 border-b border-gray-800/50">
+        <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/5"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+         <span class="mono text-xs text-cyan-400 bg-cyan-400/10 px-3 py-1 rounded-full uppercase tracking-wider">Profesional & Berpengalaman</span>
+         <h2 class="text-4xl md:text-5xl font-800 mt-6 mb-4 leading-tight">Solusi Terbaik Untuk<br><span class="gradient-text">Perangkat Anda</span></h2>
+         <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-8">Solusi teknis profesional untuk setiap masalah komputer Anda di bengkel kami, berlokasikan di Gg. Musik, Lebak Anyar.</p>
+        </div>
+      </section>
+
+      <section class="max-w-7xl mx-auto px-4 py-16">
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+          
+          <div class="bg-[#12122a] rounded-xl p-8 border border-gray-800/50 card-hover flex flex-col">
+           <div class="flex items-center gap-4 mb-5">
+            <div class="w-14 h-14 rounded-xl bg-cyan-500/10 flex items-center justify-center flex-shrink-0 border border-cyan-500/20">
+                <i data-lucide="cpu" style="width:28px;height:28px;color:#00d2ff;"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Hardware / Software / System</h3>
+           </div>
+           <p class="text-gray-400 leading-relaxed flex-1">Diagnosis kendala fisik pada motherboard, memori, atau media penyimpanan. Menangani juga permasalahan aplikasi yang *crash* maupun perbaikan sistem inti operasi Anda.</p>
+          </div>
+
+          <div class="bg-[#12122a] rounded-xl p-8 border border-gray-800/50 card-hover flex flex-col">
+           <div class="flex items-center gap-4 mb-5">
+            <div class="w-14 h-14 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0 border border-purple-500/20">
+                <i data-lucide="monitor" style="width:28px;height:28px;color:#a855f7;"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Instalasi & Konfigurasi</h3>
+           </div>
+           <p class="text-gray-400 leading-relaxed flex-1">Jasa Instalasi OS Windows/Linux bersih, Repair OS lama tanpa hilang data, Aktivasi sistem, instalasi bundle Software pendukung, hingga pencarian Driver tersulit sekalipun.</p>
+          </div>
+
+          <div class="bg-[#12122a] rounded-xl p-8 border border-gray-800/50 card-hover flex flex-col">
+           <div class="flex items-center gap-4 mb-5">
+            <div class="w-14 h-14 rounded-xl bg-red-500/10 flex items-center justify-center flex-shrink-0 border border-red-500/20">
+                <i data-lucide="layout-template" style="width:28px;height:28px;color:#ef4444;"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Pembuatan Website</h3>
+           </div>
+           <p class="text-gray-400 leading-relaxed flex-1">Jasa *Full Stack Web Developer*. Pembuatan website profil bisnis, portal berita (blog), Point of Sales (Kasir), hingga platform undangan digital yang responsif, cepat, dan modern.</p>
+          </div>
+
+          <div class="bg-[#12122a] rounded-xl p-8 border border-gray-800/50 card-hover flex flex-col">
+           <div class="flex items-center gap-4 mb-5">
+            <div class="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center flex-shrink-0 border border-green-500/20">
+                <i data-lucide="database" style="width:28px;height:28px;color:#10b981;"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Recovery Data & Network</h3>
+           </div>
+           <p class="text-gray-400 leading-relaxed flex-1">Pemulihan file/data penting dari HDD/SSD/Flashdisk yang terformat, rusak, atau terkena *bad sector*. Tersedia juga layanan pengaturan topologi Jaringan lokal (LAN / WiFi).</p>
+          </div>
+
+        </div>
+        
+        <div class="mt-16 text-center">
+            <h3 class="text-2xl font-bold text-white mb-4">Butuh bantuan segera?</h3>
+            <p class="text-gray-400 mb-6">Kami melayani pengerjaan langsung di tempat (Home Service) atau konsultasi *remote*.</p>
+            <a href="https://wa.me/6282122321195" target="_blank" class="inline-flex items-center gap-2 px-8 py-3 bg-green-500 hover:bg-green-400 text-white font-bold rounded-lg transition-colors shadow-lg shadow-green-500/20">
+                <i data-lucide="message-circle" class="w-5 h-5"></i> Hubungi via WhatsApp
+            </a>
+        </div>
+      </section>
+  </main>
+
+  <footer class="bg-[#060612] border-t border-gray-800/50 mt-auto py-6 text-center">
+      <p class="text-xs text-gray-600"><strong>© 2021 Command Computer Service</strong> | By. Reza Malik Al Hakim</p>
+  </footer>
+
+  <script>
+        lucide.createIcons();
+
+        function toggleMenu(forceClose) {
+            const menu = document.getElementById('slideMenu');
+            const overlay = document.getElementById('overlay');
+            if (forceClose === false || menu.classList.contains('open')) {
+                menu.classList.remove('open');
+                overlay.classList.remove('open');
+            } else {
+                menu.classList.add('open');
+                overlay.classList.add('open');
+            }
+        }
+  </script>
+</body>
+</html>

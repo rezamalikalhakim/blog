@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="id" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeri - Command Computer Service</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+        * { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .mono { font-family: 'Space Mono', monospace; }
+        body { background-color: #0a0a1a; color: #e5e7eb; overflow-x: hidden; }
+        .gradient-text { background: linear-gradient(135deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Animasi Slide Menu */
+        .slide-menu { transform: translateX(-100%); transition: transform 0.3s ease; }
+        .slide-menu.open { transform: translateX(0); }
+        .overlay { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .overlay.open { opacity: 1; pointer-events: all; }
+
+        /* KRITERIA ANIMASI BARU: Bergerak slide kiri & efek fade out (Diperbaiki agar tidak hilang) */
+        @keyframes slideLeftFadeOut {
+            0% {
+                transform: translateX(40px);
+                opacity: 0;
+            }
+            12% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1; /* Diubah menjadi 1 agar menetap dan tidak menghilang */
+            }
+        }
+        
+        .gallery-card {
+            opacity: 0;
+            /* forwards digunakan agar setelah animasi selesai, frame terakhir (opacity 1) dipertahankan */
+            animation: slideLeftFadeOut 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* Hover Effect: Interaksi zoom dan glow cyberpunk */
+        .gallery-card:hover {
+            transform: scale(1.03) translateY(-4px) !important;
+            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.15);
+            border-color: #00d2ff;
+            z-index: 20;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+  </style>
+</head>
+<body class="h-full flex flex-col">
+
+  <div id="overlay" class="overlay fixed inset-0 bg-black/60 z-40" onclick="toggleMenu(false)"></div>
+
+  <nav id="slideMenu" class="slide-menu fixed top-0 left-0 h-full w-72 bg-[#0f0f2a] z-50 shadow-2xl overflow-y-auto">
+    <div class="p-6 border-b border-gray-800/50">
+     <div class="flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+       <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-white text-sm">
+         <img src="logo.png">
+       </div>
+       <span class="mono text-xs text-cyan-400 font-bold">MENU PANEL</span>
+      </div>
+      <button onclick="toggleMenu(false)" class="text-gray-400 hover:text-white"><i data-lucide="x" style="width:24px;height:24px;"></i></button>
+     </div>
+    </div>
+    
+    <ul class="p-4 space-y-1">
+     <li><a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all"><i data-lucide="home" class="w-5 h-5"></i> Home</a></li>
+     <li><a href="service.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all"><i data-lucide="cpu" class="w-5 h-5"></i> Layanan</a></li>
+     <li><a href="artikel.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all"><i data-lucide="book-open" class="w-5 h-5"></i> Artikel</a></li>
+     <li><a href="upload-galeri.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all"><i data-lucide="upload" class="w-5 h-5"></i> Upload Admin</a></li>
+    </ul>
+  </nav>
+
+  <header class="sticky top-0 z-30 bg-[#0a0a1a]/90 backdrop-blur-md border-b border-gray-800/50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+     <div class="flex items-center gap-2">
+      <button onclick="toggleMenu()" class="p-2 rounded-lg hover:bg-gray-800 transition-colors"><i data-lucide="menu" style="width:22px;height:22px;"></i></button>
+      <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-white text-sm">CCS</div>
+      <div>
+       <a href="index.html"><h1 class="text-lg font-bold gradient-text">Command Computer Service</h1></a>
+       <p class="text-[10px] text-gray-500 mono">by Reza Malik Al Hakim</p>
+      </div>
+     </div>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-7xl mx-auto px-4 py-16 w-full">
+     <div class="text-center mb-16">
+         <h2 class="text-4xl font-extrabold mb-3 tracking-tight"><span class="gradient-text">Galeri Dokumentasi</span></h2>
+         <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">Dokumentasi pengerjaan service laptop, rakit PC, maintenance server, dan setup jaringan komputer.</p>
+     </div>
+
+     <div id="loadingState" class="text-center py-20">
+         <i data-lucide="loader-2" class="w-10 h-10 animate-spin mx-auto text-cyan-400 mb-4"></i>
+         <p class="text-sm text-gray-500 mono">MENGAMBIL MEDIA DARI DATABASE...</p>
+     </div>
+
+     <div id="galeriGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
+        </div>
+  </main>
+
+  <footer class="bg-[#060612] border-t border-gray-800/50 py-6 text-center mt-auto">
+      <p class="text-xs text-gray-600"><strong>© 2021 Command Computer Service</strong> | By. Reza Malik Al Hakim</p>
+  </footer>
+
+  <script>
+      const firebaseUrl = 'https://command-computer-service-blog-default-rtdb.asia-southeast1.firebasedatabase.app/galeri.json';
+
+      function toggleMenu(forceClose) {
+          const menu = document.getElementById('slideMenu');
+          const overlay = document.getElementById('overlay');
+          if (forceClose === false || menu.classList.contains('open')) {
+              menu.classList.remove('open');
+              overlay.classList.remove('open');
+          } else {
+              menu.classList.add('open');
+              overlay.classList.add('open');
+          }
+      }
+
+      // FITUR BARU: Konversi Otomatis Link YouTube biasa menjadi Link Embed (Iframe Anti-Error)
+      function extractEmbedUrl(url) {
+          if (!url) return '';
+          let videoId = '';
+          if (url.includes('youtube.com/embed/')) return url;
+          if (url.includes('youtube.com/watch?v=')) {
+              videoId = url.split('v=')[1].split('&')[0];
+              return `https://www.youtube.com/embed/${videoId}`;
+          }
+          if (url.includes('youtu.be/')) {
+              videoId = url.split('youtu.be/')[1].split('?')[0];
+              return `https://www.youtube.com/embed/${videoId}`;
+          }
+          return url;
+      }
+
+      async function loadGaleri() {
+          const grid = document.getElementById('galeriGrid');
+          const loader = document.getElementById('loadingState');
+
+          try {
+              const response = await fetch(firebaseUrl);
+              const data = await response.json();
+
+              loader.classList.add('hidden');
+              grid.classList.remove('hidden');
+
+              if (!data) {
+                  grid.innerHTML = '<div class="text-center text-gray-500 col-span-full py-12">Belum ada dokumentasi media di dalam galeri ini.</div>';
+                  return;
+              }
+
+              const items = Object.entries(data).sort((a, b) => new Date(b[1].waktu) - new Date(a[1].waktu));
+              grid.innerHTML = '';
+
+              items.forEach(([id, item], index) => {
+                  let mediaElement = '';
+                  
+                  if(item.type === 'Image') {
+                      // Template literal untuk Gambar
+                      mediaElement = `<img src="${item.media}" alt="${item.title}" class="w-full h-56 object-cover rounded-t-xl" loading="lazy">`;
+                  } else {
+                      // Template literal untuk Video
+                      const safeUrl = extractEmbedUrl(item.media);
+                      mediaElement = `
+                      <div class="w-full h-56 bg-black rounded-t-xl overflow-hidden relative">
+                          <iframe src="${safeUrl}" class="w-full h-full absolute inset-0 border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      </div>`;
+                  }
+
+                  // Variasi stagger delay agar animasi mulus dan tidak bersamaan
+                  const delayValue = (index * 0.2).toFixed(1);
+
+                  // Memasukkan template data ke dalam HTML Grid
+                  grid.innerHTML += `
+                      <div class="gallery-card bg-[#12122a] rounded-xl border border-gray-800/50 overflow-hidden shadow-lg flex flex-col" style="animation-delay: ${delayValue}s;">
+                          ${mediaElement}
+                          <div class="p-4 bg-gradient-to-t from-[#0a0a1a] to-[#12122a] flex-grow flex flex-col justify-between">
+                              <p class="text-sm font-semibold text-white line-clamp-2 mb-3">${item.title}</p>
+                              <div class="flex items-center justify-between mt-auto">
+                                  <span class="text-[10px] uppercase font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded tracking-wider">${item.type === 'Image' ? 'FOTO' : 'VIDEO'}</span>
+                                  <span class="text-[10px] text-gray-500 mono">${new Date(item.waktu).toLocaleDateString('id-ID')}</span>
+                              </div>
+                          </div>
+                      </div>
+                  `;
+              });
+
+          } catch (error) {
+              console.error(error);
+              loader.innerHTML = '<p class="text-red-400 text-sm font-medium">Gagal memuat galeri media. Silakan periksa koneksi internet Anda.</p>';
+          }
+          lucide.createIcons();
+      }
+
+      document.addEventListener('DOMContentLoaded', loadGaleri);
+  </script>
+</body>
+</html>

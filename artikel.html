@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="id" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artikel & Tutorial - Command Computer Service</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+      body { background-color: #0a0a1a; color: #e5e7eb; font-family: 'Plus Jakarta Sans', sans-serif; }
+      .gradient-text { background: linear-gradient(135deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      * { font-family: 'Plus Jakarta Sans', sans-serif; }
+      .mono { font-family: 'Space Mono', monospace; }
+      html, body { height: 100%; margin: 0; background-color: #0a0a1a; color: #e5e7eb; overflow-x: hidden; }
+        
+      /* Animasi Slide Menu */
+      .slide-menu { transform: translateX(-100%); transition: transform 0.3s ease; }
+      .slide-menu.open { transform: translateX(0); }
+      .overlay { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+      .overlay.open { opacity: 1; pointer-events: all; }
+        
+      /* Utilitas Tampilan */
+      .gradient-text { background: linear-gradient(135deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      .card-hover { transition: all 0.3s ease; }
+      .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+      .ad-space { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 2px dashed #0f3460; border-radius: 12px; padding: 40px 20px; text-align: center; color: #4a6fa5; font-size: 14px; }
+  </style>
+</head>
+<body class="h-full">
+
+  <div id="overlay" class="overlay fixed inset-0 bg-black/60 z-40" onclick="toggleMenu()"></div>
+
+  <nav id="slideMenu" class="slide-menu fixed top-0 left-0 h-full w-72 bg-[#0f0f2a] z-50 shadow-2xl overflow-y-auto">
+    <div class="p-6 border-b border-gray-800">
+     <div class="flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+       <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-white text-sm"><img src="Logo.png" width="100%" height="100%"></div>
+       <span class="mono text-xs text-cyan-400 font-bold">Menu</span>
+      </div>
+      <button onclick="toggleMenu()" class="text-gray-400 hover:text-white"><i data-lucide="x" style="width:24px;height:24px;"></i></button>
+     </div>
+     <p class="text-xs text-gray-500 mt-1">Command Computer Service</p>
+    </div>
+    
+    <ul class="p-4 space-y-1">
+     <li><a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center"><i data-lucide="home" style="width:14px;height:14px;color:white;"></i></div> Home</a></li>
+     <li><a href="about.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center"><i data-lucide="info" style="width:14px;height:14px;color:white;"></i></div> About & Profile</a></li>
+     <li><a href="artikel.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center"><i data-lucide="file-text" style="width:14px;height:14px;color:white;"></i></div> Artikel</a></li>
+     <li><a href="service.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center"><i data-lucide="settings" style="width:14px;height:14px;color:white;"></i></div> Service</a></li>
+     <li><a href="galeri-update.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center"><i data-lucide="image" style="width:14px;height:14px;color:white;"></i></div> Galeri</a></li>
+     <li><a href="kontak.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center"><i data-lucide="phone" style="width:14px;height:14px;color:white;"></i></div> Kontak</a></li>
+     <li><a href="sitemap.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center"><i data-lucide="map" style="width:14px;height:14px;color:white;"></i></div> Sitemap</a></li>
+     <li><a href="termsandconditions.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center"><i data-lucide="shield" style="width:14px;height:14px;color:white;"></i></div> Terms & Conditions</a></li>
+     <li><a href="disclaimer.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 text-gray-300 hover:text-cyan-400 transition-all">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center"><i data-lucide="alert-triangle" style="width:14px;height:14px;color:white;"></i></div> Disclaimer</a></li>
+    </ul>
+
+    <div class="p-6 mt-4 border-t border-gray-800">
+        <p class="text-xs text-gray-500 mb-3 uppercase tracking-wider">Social Media</p>
+        <div class="flex gap-4">
+            <a href="https://instagram.com/_reza1996ma_" target="_blank" class="text-gray-400 hover:text-pink-500 transition-colors"><i data-lucide="instagram" style="width:20px;height:20px;"></i></a>
+            <a href="https://facebook.com/commandcomputerservice" target="_blank" class="text-gray-400 hover:text-blue-500 transition-colors"><i data-lucide="facebook" style="width:20px;height:20px;"></i></a>
+        </div>
+    </div>
+  </nav>
+
+  <header class="sticky top-0 z-30 bg-[#0a0a1a]/90 backdrop-blur-md border-b border-gray-800/50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+     <div class="flex items-center gap-2">
+      <button onclick="toggleMenu()" class="p-2 rounded-lg hover:bg-gray-800 transition-colors"><i data-lucide="menu" style="width:22px;height:22px;"></i></button>
+      <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-white text-sm"><img src="Logo.png" width="100%" height="100%"></div>
+      <div>
+       <a href="index.html"><h1 class="text-lg font-bold gradient-text">Command Computer Service</h1></a>
+       <p class="text-[10px] text-gray-500 mono">by Reza Malik Al Hakim</p>
+      </div>
+     </div>
+     
+     <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="index.html" class="text-white">Home</a>
+        <a href="artikel.html" class="text-gray-400 hover:text-white transition-colors">Artikel</a>
+        <a href="service.html" class="text-gray-400 hover:text-white transition-colors">Service</a>
+        <a href="sitemap.html" class="text-gray-400 hover:text-white transition-colors">Sitemaps</a>
+     </div>
+     <a href="kontak.html" class="hidden sm:block px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-black text-sm font-semibold rounded-lg transition-colors">Daftar Service</a>
+    </div>
+  </header>
+
+  <section class="max-w-7xl mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold mb-2 gradient-text">Artikel & Tutorial</h2>
+    <p class="text-gray-400 mb-8">Panduan troubleshooting komputer lengkap dan terpercaya</p>
+    
+    <div id="allArticlesContainer" class="grid lg:grid-cols-2 gap-8">
+      <p class="text-gray-500 text-sm">Memuat daftar artikel...</p>
+    </div>
+  </section>
+  
+  <script>
+        function toggleMenu(forceClose) {
+            const menu = document.getElementById('slideMenu');
+            const overlay = document.getElementById('overlay');
+            if (forceClose === false || menu.classList.contains('open')) {
+                menu.classList.remove('open');
+                overlay.classList.remove('open');
+            } else {
+                menu.classList.add('open');
+                overlay.classList.add('open');
+            }
+        }
+        lucide.createIcons();
+  </script>
+
+  <script>
+        async function loadAllArticles() {
+            const container = document.getElementById('allArticlesContainer');
+            const firebaseUrl = 'https://command-computer-service-blog-default-rtdb.asia-southeast1.firebasedatabase.app/artikel.json';
+
+            try {
+                const response = await fetch(firebaseUrl);
+                const data = await response.json();
+
+                if (data) {
+                    container.innerHTML = ''; 
+                    
+                    const articles = Object.keys(data).map(key => ({
+                        id: key,
+                        ...data[key]
+                    })).sort((a, b) => new Date(b.waktu) - new Date(a.waktu));
+
+                    articles.forEach(article => {
+                        let catColor = 'text-cyan-400 bg-cyan-400/10';
+                        if (article.category === 'Software') catColor = 'text-purple-400 bg-purple-400/10';
+                        if (article.category === 'Jaringan') catColor = 'text-amber-400 bg-amber-400/10';
+
+                        // Mengambil teks murni untuk deskripsi
+                        const tempDiv = document.createElement("div");
+                        tempDiv.innerHTML = article.content || '';
+                        const plainText = tempDiv.textContent || tempDiv.innerText || "";
+                        const shortDesc = plainText.length > 150 ? plainText.substring(0, 150) + '...' : plainText;
+
+                        // ==========================================
+                        // FITUR BARU: 3 LAPIS PENCARIAN GAMBAR AMAN
+                        // ==========================================
+                        let bannerImg = '';
+                        
+                        // Lapis 1: Coba ambil dari data 'images' (Struktur baru dari upload-artikel)
+                        if (article.images) {
+                            // Firebase kadang menyimpan array sebagai object (contoh: { "0": "data:image..." })
+                            const imgArray = Array.isArray(article.images) ? article.images : Object.values(article.images);
+                            if (imgArray.length > 0 && typeof imgArray[0] === 'string') {
+                                bannerImg = imgArray[0];
+                            }
+                        }
+                        
+                        // Lapis 2: Coba ambil dari data 'image' (Struktur lama/cadangan)
+                        if (!bannerImg && article.image && typeof article.image === 'string') {
+                            bannerImg = article.image;
+                        }
+
+                        // Lapis 3: Ekstrak gambar pertama dari dalam ISI Teks Artikel
+                        if (!bannerImg) {
+                            const firstImgInText = tempDiv.querySelector('img');
+                            if (firstImgInText && firstImgInText.src) {
+                                bannerImg = firstImgInText.src;
+                            }
+                        }
+
+                        // Render elemen gambar HANYA JIKA bannerImg berhasil didapat
+                        // onerror digunakan agar elemen disembunyikan jika URL base64 korup
+                        const imageHTML = bannerImg 
+                            ? `<div class="h-48 w-full mb-4 overflow-hidden rounded-lg border border-gray-800/50 shadow-md">
+                                   <img src="${bannerImg}" class="w-full h-full object-cover" alt="${article.title}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                               </div>` 
+                            : '';
+
+                        const articleHTML = `
+                        <article class="bg-[#12122a] rounded-xl p-6 border border-gray-800/50 transition hover:border-cyan-500/50 card-hover flex flex-col justify-between">
+                            <div>
+                                ${imageHTML}
+                                <span class="text-[10px] px-2 py-1 rounded ${catColor}">${article.category.toUpperCase()}</span>
+                                <h3 class="text-xl font-bold mt-3 mb-3">
+                                    <a href="baca-artikel.html?id=${article.id}" class="hover:text-cyan-400">${article.title}</a>
+                                </h3>
+                                <p class="text-gray-400 text-sm mb-4">${shortDesc}</p>
+                            </div>
+                            <div class="mt-2">
+                                <a href="baca-artikel.html?id=${article.id}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">
+                                    Baca selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </article>`;
+                        container.innerHTML += articleHTML;
+                    });
+                } else {
+                    container.innerHTML = '<p class="text-gray-500 text-sm col-span-2">Belum ada artikel yang dipublish.</p>';
+                }
+            } catch (error) {
+                console.error('Error memuat artikel:', error);
+                container.innerHTML = '<p class="text-red-500 text-sm">Gagal memuat artikel.</p>';
+            }
+            lucide.createIcons();
+        }
+
+        document.addEventListener('DOMContentLoaded', loadAllArticles);
+  </script>
+
+  <footer class="bg-[#060612] border-t border-gray-800/50 py-6 text-center text-align-center">
+      <p class="text-xs text-gray-600"><strong>© 2021 Command Computer Service</strong> | By. Reza Malik Al Hakim</p>
+  </footer>
+</body>
+</html> 
